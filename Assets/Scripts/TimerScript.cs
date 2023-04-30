@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TimerScript : MonoBehaviour
 {
-    public float timeRemaining = 90;
+    public static float timeRemaining = 90;
     public bool timerIsRunning = false;
     public Text timeText;
     private void Start()
