@@ -39,6 +39,7 @@ public class Manager : MonoBehaviour
 
         foreach (int i in occupiedSpawnPoints){
             Vector2 pos = pizzaSpawnPoints[i].transform.position;
+            pos.y -= 0.05f;
             Instantiate(deliveryPrefab, pos, Quaternion.identity);
         }
     }
@@ -69,7 +70,7 @@ public class Manager : MonoBehaviour
         occupiedSpawnPoints.Add(spawnPoint);
 
         Vector2 pos = pizzaSpawnPoints[spawnPoint].transform.position;
-
+        pos.y -= 0.05f;
         delivery.transform.position = pos;
     }
 
