@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float speed = 5f; // Speed of the player's movement
@@ -10,21 +12,37 @@ public class Movement : MonoBehaviour
     private float my; // The player's vertical input
     private Vector2 mousePos; // The position of the mouse in the game world
 
+    public float spinDamping = 0.5f; // The damping of the spin of the player on colission
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // Get a reference to the Rigidbody2D component attached to the player
     }
 
+      private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
+        
         mx = Input.GetAxis("Horizontal"); // Get the horizontal input from the player
         my = Input.GetAxis("Vertical"); // Get the vertical input from the player
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Get the position of the mouse in the game world
 
-        // Calculate the angle between the player's position and the mouse position and rotate the player accordingly
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        // if the mouse is on the right side of the screen then flip the player sprite to the right side
+        if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     void FixedUpdate()
