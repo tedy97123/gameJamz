@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb; // Reference to the Rigidbody2D component attached to the player
     private float mx; // The player's horizontal input
     private float my; // The player's vertical input
+<<<<<<< HEAD
     private Vector2 mousePos; // The position of the mouse in the game world
 
     public float spinDamping = 0.5f; // The damping of the spin of the player on colission
@@ -18,6 +19,8 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>(); // Get a reference to the Rigidbody2D component attached to the player
     }
+=======
+>>>>>>> 0469a9bac235372d9caacbef37edf2377d295a54
 
       private void OnCollisionEnter2D(Collision2D other)
     {
@@ -33,6 +36,7 @@ public class Movement : MonoBehaviour
         mx = Input.GetAxis("Horizontal"); // Get the horizontal input from the player
         my = Input.GetAxis("Vertical"); // Get the vertical input from the player
 
+<<<<<<< HEAD
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Get the position of the mouse in the game world
 
         // if the mouse is on the right side of the screen then flip the player sprite to the right side
@@ -47,7 +51,9 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+=======
+>>>>>>> 0469a9bac235372d9caacbef37edf2377d295a54
         // Move the player based on the input from the player and the speed of the player
-        rb.velocity = new Vector2(mx, my).normalized * speed;
+        rb.velocity = new Vector2(mx, my) * speed;
     }
 }
