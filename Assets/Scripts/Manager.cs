@@ -13,7 +13,11 @@ public class Manager : MonoBehaviour
     public static int score = 0;
     public static int time = 90;
     public static int pizza = 3;
-    public static int startingDeliveries = 1;
+
+    public bool timerIsRunning = true;
+    public static float timeRemaining = 90;
+
+    public static int startingDeliveries = 2;
 
     private List<int> occupiedSpawnPoints = new List<int>();
 
@@ -39,14 +43,27 @@ public class Manager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                
+            }
+            else
+            {
+                timeRemaining = 0;
+                timerIsRunning = false;
+            }
+        }
+    }
 
     public void SpawnDelivery(GameObject delivery) 
     {
         int minPoint = getMinPoint();
         int spawnPoint = getSpawnPoint();
-
-
-        Debug.Log(score);
 
         occupiedSpawnPoints.RemoveAll(item => item == minPoint);
         occupiedSpawnPoints.Add(spawnPoint);
@@ -67,7 +84,6 @@ public class Manager : MonoBehaviour
 
         return spawnPoint;
     }
-
 
     private int getMinPoint() 
     {
